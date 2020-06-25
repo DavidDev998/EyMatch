@@ -5,6 +5,9 @@
   "repository": "https://github.com/DavidDev998/EyMatch.git",
   "author": "David Junior <david12gyn@hotmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev":"nodemon src/server.js"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "nodemon": "^2.0.4",
@@ -12,7 +15,7 @@
     "pg-hstore": "^2.3.3"
   },
   "devDependencies": {
-    "sequelize": "^5.21.13",
-    "sequelize-cli": "^5.5.1"
+    "sequelize": "^6.1.0",
+    "sequelize-cli": "^6.0.0"
   }
 }

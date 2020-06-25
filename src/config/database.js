@@ -9,6 +9,7 @@ module.exports = {
     database:'eymatch',
     define:{
         timestamps: true,
-        underscored: true
+        underscored: true,
+        freezeTableName: true
     },
 };

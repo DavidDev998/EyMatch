@@ -1,11 +1,14 @@
 'use strict';
+
+const sequelize = require("sequelize");
+
 //arquivo de migração para criação da tabela de pessoas no banco 
 
 
 module.exports = {
   //método up executa para criar;
   up: (queryInterface, Sequelize) => {
-      return queryInterface.createTable('users', 
+      return queryInterface.createTable('person', 
       { 
         id: {
           allowNull: false,
@@ -19,15 +22,23 @@ module.exports = {
         data_nascimento:{
           type: Sequelize.DATE,
         },
-        
-        createdAt:Sequelize.DATE,
-        updatedAt: Sequelize.DATE,
-        excludedAt: Sequelize.DATE,
-
+        cpf:Sequelize.STRING,
+        rg:Sequelize.STRING,
+        sexo:Sequelize.STRING,
+        orgao_expedidor:Sequelize.STRING,
+        cargo:Sequelize.STRING,
+        renda:Sequelize.REAL,
+        renda_familiar:Sequelize.REAL,
+        renda_complementar: Sequelize.REAL,
+        numero_dependentes:Sequelize.INTEGER,
+        patrimonio:Sequelize.REAL,
+        created_at:Sequelize.DATE,
+        updated_at: Sequelize.DATE,
+        excluded_at: Sequelize.DATE,
       });
   },
 //método down executa para desfazer as alterações do UP caso algo de errado ou caso seja executado o comando sequelize migrate:undo;
   down: (queryInterface, Sequelize) => {
-      return queryInterface.dropTable('users');
+      return queryInterface.dropTable('person');
   }
 };
