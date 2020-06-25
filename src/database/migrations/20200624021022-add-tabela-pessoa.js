@@ -19,9 +19,10 @@ module.exports = {
         data_nascimento:{
           type: Sequelize.DATE,
         },
+        
         createdAt:Sequelize.DATE,
         updatedAt: Sequelize.DATE,
-        
+        excludedAt: Sequelize.DATE,
 
       });
   },
