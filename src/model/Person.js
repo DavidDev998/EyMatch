@@ -15,6 +15,7 @@ class person extends Model{
             renda_complementar: DataTypes.REAL,
             numero_dependentes: DataTypes.INTEGER,
             patrimonio: DataTypes.REAL,
+            nome_da_mae:DataTypes.STRING,
             excluded_at: DataTypes.DATE,
         }, {
             sequelize: connection

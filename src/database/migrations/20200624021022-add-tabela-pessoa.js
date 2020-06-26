@@ -32,6 +32,7 @@ module.exports = {
         renda_complementar: Sequelize.REAL,
         numero_dependentes:Sequelize.INTEGER,
         patrimonio:Sequelize.REAL,
+        nome_da_mae:Sequelize.STRING,
         created_at:Sequelize.DATE,
         updated_at: Sequelize.DATE,
         excluded_at: Sequelize.DATE,
