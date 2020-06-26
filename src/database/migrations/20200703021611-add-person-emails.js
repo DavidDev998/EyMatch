@@ -8,30 +8,27 @@ const sequelize = require("sequelize");
 module.exports = {
   //método up executa para criar;
   up: (queryInterface, Sequelize) => {
-      return queryInterface.createTable('person', 
+      return queryInterface.createTable('person_emails', 
       { 
+        //dados da pessoa
         id: {
           allowNull: false,
           autoIncrement: true,
           primaryKey: true,
           type: Sequelize.INTEGER
         },
-        name: {
-          type: Sequelize.STRING
+        fk_person:{
+          type:Sequelize.INTEGER,
+          references: {model: 'person' ,key:'id'},
+          onUpdate:'CASCADE',
+          onDelete:'CASCADE',
         },
-        data_nascimento:{
-          type: Sequelize.DATE,
+        fk_emails:{
+          type:Sequelize.INTEGER,
+          references: {model: 'emails' ,key:'id'},
+          onUpdate:'CASCADE',
+          onDelete:'SET NULL',
         },
-        cpf:Sequelize.STRING,
-        rg:Sequelize.STRING,
-        sexo:Sequelize.STRING,
-        orgao_expedidor:Sequelize.STRING,
-        cargo:Sequelize.STRING,
-        renda:Sequelize.REAL,
-        renda_familiar:Sequelize.REAL,
-        renda_complementar: Sequelize.REAL,
-        numero_dependentes:Sequelize.INTEGER,
-        patrimonio:Sequelize.REAL,
         created_at:Sequelize.DATE,
         updated_at: Sequelize.DATE,
         excluded_at: Sequelize.DATE,
@@ -39,6 +36,6 @@ module.exports = {
   },
 //método down executa para desfazer as alterações do UP caso algo de errado ou caso seja executado o comando sequelize migrate:undo;
   down: (queryInterface, Sequelize) => {
-      return queryInterface.dropTable('person');
+      return queryInterface.dropTable('person_emails');
   }
 };

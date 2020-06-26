@@ -18,6 +18,7 @@ module.exports = {
       inscricao_estadual:Sequelize.STRING,
       lucro_ano:Sequelize.REAL,
       patrimonio:Sequelize.REAL,
+      faturamento_presumido:Sequelize.REAL,
       created_at:Sequelize.DATE,
       updated_at: Sequelize.DATE,
       excluded_at: Sequelize.DATE,

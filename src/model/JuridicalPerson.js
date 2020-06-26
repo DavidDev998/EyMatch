@@ -11,6 +11,7 @@ class juridical_person extends Model{
             inscricao_estadual: DataTypes.STRING,
             lucro_ano:DataTypes.REAL,
             patrimonio: DataTypes.REAL,
+            faturamento_presumido: DataTypes.REAL,
             excluded_at: DataTypes.DATE,
         }, {
             sequelize: connection
