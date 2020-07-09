@@ -22,6 +22,7 @@ routes.post('/profession/create',ProfessionController.create);
 routes.post('/civil_status/create',Civil_statusController.create);
 
 routes.post('/regime_of_goods/create',RegimeOfGoodsController.create);
+//TODO:MÉTODOS DELETE AND UPDATE
 
 //ROTAS DE JURIDICAL PERSON
 routes.post('/JuridicalPerson/Create', JuridicalPersonController.create);
