@@ -16,13 +16,17 @@ const JuridicalPersonController = require('./controller/JuridicalPersonControlle
 routes.post('/Person/Create', PersonController.create);
 routes.get('/Person',PersonController.index);
 routes.get('/Person/Delete/:pk', PersonController.delete);
+routes.post('/Person/Update/', PersonController.update);
 
+//ROTAS DE PROFESSION
 routes.post('/profession/create',ProfessionController.create);
 
+//ROTAS DE ESTADO CIVIL
 routes.post('/civil_status/create',Civil_statusController.create);
 
+//ROTAS DE REGIME DE BENS
 routes.post('/regime_of_goods/create',RegimeOfGoodsController.create);
-//TODO:MÉTODOS DELETE AND UPDATE
+
 
 //ROTAS DE JURIDICAL PERSON
 routes.post('/JuridicalPerson/Create', JuridicalPersonController.create);

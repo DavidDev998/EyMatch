@@ -12,6 +12,7 @@ module.exports = {
       },
       country_code:Sequelize.STRING,
       ddd:Sequelize.INTEGER,
+      number:Sequelize.STRING,
       type:Sequelize.STRING,
       note:Sequelize.STRING,
       score:Sequelize.REAL,

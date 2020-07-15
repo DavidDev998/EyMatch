@@ -14,7 +14,7 @@ module.exports = {
       value:Sequelize.STRING,
       note:Sequelize.STRING,
       score:Sequelize.REAL,
-      fk_person:{
+      person_id:{
         type:Sequelize.INTEGER,
         references: {model: 'person' ,key:'id'},
         onUpdate:'CASCADE',

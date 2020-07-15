@@ -6,6 +6,8 @@ const Movable = sequelize.define('movables');
 const Profession = sequelize.define('profession');
 const Civil_status  = sequelize.define('civil_status');
 const Regime_of_goods = sequelize.define('regime_of_goods');
+const Phone = sequelize.define('phone');
+const Email = sequelize.define('email');
 
 const Person = sequelize.define('Person', {
   // Model attributes are defined here
@@ -70,10 +72,12 @@ const Person = sequelize.define('Person', {
   tableName: 'person'
 });
 
-Person.hasMany(Immovable,{ foreignKey: 'fk_person',as: 'immovables'  });
-Person.hasMany(Movable,{ foreignKey: 'fk_profession',as: 'movables'  });
-Person.belongsTo(Profession,{ foreignKey: 'fk_profession',as: 'profession'  });
-Person.belongsTo(Civil_status,{ foreignKey: 'fk_civil_status',as: 'civil_status'  });
-Person.belongsTo(Regime_of_goods,{ foreignKey: 'fk_regime_de_bens',as: 'regime_of_goods'  });
+Person.hasMany(Immovable,{ foreignKey: 'person_id',as: 'immovables'  });
+Person.hasMany(Movable,{ foreignKey: 'person_id',as: 'movables'  });
+Person.belongsTo(Profession,{ foreignKey: 'profession_id',as: 'profession'  });
+Person.belongsTo(Civil_status,{ foreignKey: 'civil_status_id',as: 'civil_status'  });
+Person.belongsTo(Regime_of_goods,{ foreignKey: 'regime_de_bens_id',as: 'regime_of_goods'  });
+Person.belongsToMany(Phone,{foreignKey:'person_id',through:'person_phones',as:'phones'});
+Person.belongsToMany(Email,{foreignKey:'person_id',through:'person_emails',as:'emails'});
 
 module.exports = Person;

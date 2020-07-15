@@ -17,17 +17,19 @@ module.exports = {
           primaryKey: true,
           type: Sequelize.INTEGER
         },
-        fk_person:{
+        person_id:{
           type:Sequelize.INTEGER,
           references: {model: 'person' ,key:'id'},
           onUpdate:'CASCADE',
           onDelete:'CASCADE',
+          allowNull:false,
         },
-        fk_phones:{
+        phone_id:{
           type:Sequelize.INTEGER,
           references: {model: 'phones' ,key:'id'},
           onUpdate:'CASCADE',
-          onDelete:'SET NULL',
+          onDelete:'CASCADE',
+          allowNull:false,
         },
         created_at:Sequelize.DATE,
         updated_at: Sequelize.DATE,

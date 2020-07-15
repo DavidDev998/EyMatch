@@ -14,6 +14,6 @@ const Regime_of_goods = sequelize.define('Regime_of_goods', {
     tableName: 'regime_of_goods'
   });
 
-Regime_of_goods.hasOne(Person,{ foreignKey:'fk_regime_de_bens', through:'person', as: 'persons' })
+Regime_of_goods.hasOne(Person,{ foreignKey:'regime_de_bens_id', through:'person', as: 'persons' })
 
 module.exports = Regime_of_goods;

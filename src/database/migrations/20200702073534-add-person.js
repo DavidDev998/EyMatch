@@ -44,7 +44,7 @@ module.exports = {
         patrimony:Sequelize.REAL,
         scholarity:Sequelize.STRING,
         //colunas relacionadas
-        fk_profession:{
+        profession_id:{
           type:Sequelize.INTEGER,
           references: {model: 'profession' ,key:'id'},
           onUpdate:'CASCADE',
@@ -68,27 +68,15 @@ module.exports = {
         //   onUpdate:'CASCADE',
         //   onDelete:'SET NULL',
         // },
-        fk_civil_status:{
+        civil_status_id:{
           type:Sequelize.INTEGER,
           references: {model: 'civil_status' ,key:'id'},
           onUpdate:'CASCADE',
           onDelete:'SET NULL',
         },
-        fk_regime_de_bens:{
+        regime_de_bens_id:{
           type:Sequelize.INTEGER,
           references: {model: 'regime_of_goods' ,key:'id'},
-          onUpdate:'CASCADE',
-          onDelete:'SET NULL',
-        },
-        fk_phones:{
-          type:Sequelize.INTEGER,
-          references: {model: 'phones' ,key:'id'},
-          onUpdate:'CASCADE',
-          onDelete:'SET NULL',
-        },
-        fk_emails:{
-          type:Sequelize.INTEGER,
-          references: {model: 'emails' ,key:'id'},
           onUpdate:'CASCADE',
           onDelete:'SET NULL',
         },

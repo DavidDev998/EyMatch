@@ -15,6 +15,6 @@ const Immovable_property = sequelize.define('Imovable_property', {
     tableName: 'immovable_property'
   });
 
-Immovable_property.belongsTo(Person,{ foreignKey:'fk_person', as: 'Person' })
+Immovable_property.belongsTo(Person,{ foreignKey:'person_id', as: 'Person' })
 
 module.exports = Immovable_property;

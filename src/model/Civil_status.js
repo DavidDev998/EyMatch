@@ -14,6 +14,6 @@ const Civil_status = sequelize.define('Civil_status', {
     tableName: 'civil_status'
   });
 
-Civil_status.hasOne(Person,{ foreignKey:'fk_civil_status', through:'person', as: 'persons' })
+Civil_status.hasOne(Person,{ foreignKey:'civil_status_id', through:'person', as: 'persons' })
 
 module.exports = Civil_status;

@@ -15,6 +15,6 @@ const Profession = sequelize.define('Profession', {
     tableName: 'profession'
   });
 
-Profession.hasOne(Person,{ foreignKey:'fk_profession', through:'person', as: 'persons' })
+Profession.hasOne(Person,{ foreignKey:'profession_id', through:'person', as: 'persons' })
 
 module.exports = Profession;
