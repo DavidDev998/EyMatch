@@ -7,6 +7,7 @@ const Regime_of_goods = require('../model/Regime_of_goods');
 const { findByPk, update } = require('../model/Person');
 const Phone = require('../model/Phone');
 const Email = require('../model/Email');
+const Address = require('../model/Address');
 
 module.exports ={
     //cria Person
@@ -21,13 +22,15 @@ module.exports ={
             const { regime_of_goods } = req.body;
             const { phone } = req.body;
             const { email } = req.body;
+            const { address } = req.body;
             
             let newPerson = new Person();
             let newImmovable = new Immovable();
             let newMovable = new Movable();
             let newProfession = new Profession();
-            var newPhone = new Phone();
+            let newPhone = new Phone();
             let newEmail = new Email();
+            let newAddress = new Address();
 
             //cria Person
             if(person != null)
@@ -57,6 +60,16 @@ module.exports ={
                 });
             }
 
+            //cria endereço
+            if(address != null)
+            {
+                address.forEach(async element => {
+                    //cria o telefone
+                    newAddress = (await Address.create(element));
+                    newPerson.addAddresses(newAddress.id);
+                    console.log(newAddress)
+                });
+            }
             //cria immovable_property
             if(immovable != null)
             {

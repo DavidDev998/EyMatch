@@ -29,9 +29,9 @@ const Address = sequelize.define('Address',
     tableName : 'address'
 });
 
-Address.belongsToMany(Person, { foreignKey:'address_id', through:'person', as: 'persons' })
+Address.belongsToMany(Person, { foreignKey:'address_id', through:'person_addresses', as: 'persons' })
 Address.belongsToMany(Product, { foreignKey: 'address_id', through: 'product', as: 'products' })
 Address.belongsToMany(Sample, { foreignKey: 'address_id', through: 'sample', as: 'samples' })
-Address.belongsToMany(JuridicalPerson, { foreignKey: 'address_id', through: 'juridical_person', as: 'juridical_persons' })
+//Address.belongsToMany(JuridicalPerson, { foreignKey: 'address_id', through: 'juridical_person', as: 'juridical_persons' })
 
 module.exports = Address;

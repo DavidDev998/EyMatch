@@ -8,6 +8,7 @@ const Civil_status  = sequelize.define('civil_status');
 const Regime_of_goods = sequelize.define('regime_of_goods');
 const Phone = sequelize.define('phone');
 const Email = sequelize.define('email');
+const Address = sequelize.define('address');
 
 const Person = sequelize.define('Person', {
   // Caracteristicas
@@ -79,5 +80,6 @@ Person.belongsTo(Civil_status,{ foreignKey: 'civil_status_id',as: 'civil_status'
 Person.belongsTo(Regime_of_goods,{ foreignKey: 'regime_de_bens_id',as: 'regime_of_goods'  });
 Person.belongsToMany(Phone,{foreignKey:'person_id',through:'person_phones',as:'phones'});
 Person.belongsToMany(Email,{foreignKey:'person_id',through:'person_emails',as:'emails'});
+Person.belongsToMany(Address,{foreignKey:'person_id',through:'person_addresses',as:'addresses'});
 
 module.exports = Person;

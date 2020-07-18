@@ -23,7 +23,7 @@ module.exports = {
       attachment       : Sequelize.STRING,
       auditorium       : Sequelize.STRING,
       pad              : Sequelize.STRING,
-      living_room      : Sequelize.STRING,
+      room             : Sequelize.STRING,
       house            : Sequelize.INTEGER,
       apartment_number : Sequelize.INTEGER,
       created_at       : Sequelize.DATE,
