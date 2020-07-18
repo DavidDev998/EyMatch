@@ -15,10 +15,23 @@ module.exports = {
       reserved      : Sequelize.BOOLEAN,
       launch        : Sequelize.DATE,
       phone         : Sequelize.STRING,
-      address       : Sequelize.UUID,
       created_at    : Sequelize.DATE,
       updated_at    : Sequelize.DATE,
       excluded_at   : Sequelize.DATE,
+      product_id :
+      {
+        type : Sequelize.INTEGER,
+        references : {model: 'product', key: 'id'},
+        onUpdate : 'CASCADE',
+        onDelete : 'CASCADE',
+      },
+      address_id :
+      {
+        type : Sequelize.INTEGER,
+        references : {model: 'address', key: 'id'},
+        onUpdate : 'CASCADE',
+        onDelete : 'CASCADE',
+      }
     });
      
   },

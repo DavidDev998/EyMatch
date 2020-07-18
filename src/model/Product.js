@@ -4,6 +4,7 @@ const sequelize = new Sequelize(dbConfig);
 const Person = sequelize.define('Person');
 const Sample = sequelize.define('Sample');
 const JuridicalPerson = sequelize.define('JuridicalPerson');
+const Address = sequelize.define('Address');
 
 const Product = sequelize.define ('Product',
 {
@@ -25,11 +26,15 @@ const Product = sequelize.define ('Product',
     address       : DataTypes.UUID,
     consumable_by : DataTypes.STRING,
     slogan        : DataTypes.TEXT,
-    sample        : DataTypes.UUID,
     supplier      : DataTypes.UUID,
 }, 
 {
     tableName : 'product'
 });
+
+Product.belongsTo(Person, { foreignKey: 'product_id', as: 'persons' })
+Product.belongsTo(JuridicalPerson, { foreignKey: 'product_id', as: 'juridical_persons' })
+Product.hasOne(Address, { foreignKey: 'product_id',  as: 'addresses' })
+Product.hasMany(Sample, { foreignKey: 'product_id', as: 'samples'})
 
 module.exports = product;
