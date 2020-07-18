@@ -18,7 +18,56 @@ module.exports =  {
         }
         catch(e)
         {
-            return res.json({Message:"Erro: " + e})
+            res.status(400);
+            return res.json({Message:"Erro: " + e});
+        }
+    },
+
+    async index(req,res){
+        try
+        {
+            const listCivilStatus = await Civil_status.findAll();
+            res.json(listCivilStatus);
+        }
+        catch(e)
+        {
+            res.status(404);
+            return res.json({Message:"Erro: " + e});
+        }
+    },
+
+    async update(req,res){
+        try{
+            const {civil_status} = req.body;
+            //verifica se existe
+            const toUpdate = await Civil_status.findByPk(civil_status.id);
+            if(toUpdate)
+            {
+                //atualiza
+                (await toUpdate).update(civil_status)
+            }
+            res.json({Message:"Success"})
+            
+        }
+        catch(e)
+        {
+            res.status(400)
+            res.json({Message:"Erro " + e.Message})
+        }
+    },
+
+    async delete(req,res){
+        try{
+            const pk =  parseInt(req.params.pk);
+            const toExclude = await Civil_status.findByPk(pk);
+
+            await toExclude.destroy();
+
+            return res.json({Message:"Success"});
+        }catch(e)
+        {   
+            res.status(400)
+            res.json({Message:"Erro " + e.Message})
         }
     }
 }

@@ -26,7 +26,7 @@ module.exports ={
             let newImmovable = new Immovable();
             let newMovable = new Movable();
             let newProfession = new Profession();
-            let newPhone = new Phone();
+            var newPhone = new Phone();
             let newEmail = new Email();
 
             //cria Person
@@ -35,47 +35,39 @@ module.exports ={
                 newPerson = await Person.create(person);
             }
 
-            //cria phone
+            //cria phones
             if(phone != null)
             {
-                newPhone = await Phone.create(phone);
-                //vincula phone a person
-                newPerson.addPhones([newPhone.id]);
+                //para cada telefone
+                phone.forEach(async element => {
+                    //cria o telefone
+                    newPhone = (await Phone.create(element));
+                    newPerson.addPhones(newPhone.id)
+                });
+                
             }
 
             //cria email
             if(email != null)
             {
-                newEmail = await Email.create(email);
-                //vincula phone a person
-                newPerson.addEmails([newEmail.id]);
+                email.forEach(async element => {
+                    //cria o telefone
+                    newEmail = (await Email.create(element));
+                    newPerson.addEmails(newEmail.id);
+                });
             }
 
             //cria immovable_property
             if(immovable != null)
             {
-                newImmovable  = await Immovable.create({
-                    name:immovable.name,
-                    value:immovable.value,
-                    note:immovable.note,
-                    score:immovable.score,
-                    fk_person:newPerson.id,
-                });
-                //vincula immovable a person
-                newPerson.addImmovables([newImmovable.id]);    
+                newImmovable = await Immovable.create(immovable);
+                newImmovable.setPerson(newPerson.id);
             }
             
             // Cria movable
             if(movable !=  null){
-                newMovable = await Movable.create({
-                    name:movable.name,
-                    value:movable.value,
-                    note:movable.note,
-                    score:movable.score,
-                    fk_person:newPerson.id,
-                });
-                // vincula Movable a person
-                newPerson.addMovable([newMovable.id]);
+                newMovable = await Movable.create(movable);
+                newMovable.setPerson(newPerson.id);
             }
             //Vincula a uma profissao
             newProfession = await Profession.findByPk(profession);
@@ -99,14 +91,24 @@ module.exports ={
         }
         catch(e)
         {
+            res.status(400)
             return res.json({Message:"Erro: " + e})
         }
         
     },
 
     async index(req,res){
-        const listPerson = await Person.findAll();
-        return res.json(listPerson);
+        try
+        {
+            const listPerson = await Person.findAll();
+            return res.json(listPerson);
+        }
+        catch(e)
+        {
+            res.status(404)
+            return res.json({Message:"Erro: " + e})
+        }
+        
     },
 
     async delete(req,res){
@@ -119,7 +121,7 @@ module.exports ={
             return res.json({Message:"Pessoa " + excludePerson.name + " excluida"});
         }catch(e)
         {   
-            res.status(401)
+            res.status(400)
             res.json({Message:"Erro " + e.Message})
         }
         
@@ -139,7 +141,8 @@ module.exports ={
         }
         catch(e)
         {
-
+            res.status(400)
+            res.json({Message:"Erro " + e.Message})
         }
     }
 

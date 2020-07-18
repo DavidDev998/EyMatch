@@ -18,5 +18,52 @@ module.exports = {
         {
             return res.json({Message:"Erro: " + e})
         }
+    },
+
+    async index(req,res){
+        try
+        {
+            const regimeList = await Regime_of_goods.findAll();
+            res.json(regimeList);
+        }
+        catch(e)
+        {
+            res.status(404);
+            return res.json({Message:"Erro: " + e});
+        }
+    },
+
+    async update(req,res){
+        try{
+            const {regime_of_goods} = req.body;
+            //verifica se existe
+            const toUpdate = await Regime_of_goods.findByPk(regime_of_goods.id);
+            if(toUpdate)
+            {
+                (await toUpdate).update(regime_of_goods)
+            }
+            res.json({Message:"Success"})
+            
+        }
+        catch(e)
+        {
+            res.status(400)
+            res.json({Message:"Erro " + e.Message})
+        }
+    },
+
+    async delete(req,res){
+        try{
+            const pk =  parseInt(req.params.pk);
+            const toExclude = await Regime_of_goods.findByPk(pk);
+
+            await toExclude.destroy();
+
+            return res.json({Message:"Success"});
+        }catch(e)
+        {   
+            res.status(400)
+            res.json({Message:"Erro " + e.Message})
+        }
     }
 }

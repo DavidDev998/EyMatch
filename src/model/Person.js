@@ -10,7 +10,7 @@ const Phone = sequelize.define('phone');
 const Email = sequelize.define('email');
 
 const Person = sequelize.define('Person', {
-  // Model attributes are defined here
+  // Caracteristicas
     name: DataTypes.STRING,
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
