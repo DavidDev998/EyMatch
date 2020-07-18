@@ -6,7 +6,7 @@
   "author": "David Junior <david12gyn@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev":"nodemon src/server.js"
+    "dev": "nodemon src/server.js"
   },
   "dependencies": {
     "express": "^4.17.1",
@@ -15,7 +15,7 @@
     "pg-hstore": "^2.3.3"
   },
   "devDependencies": {
-    "sequelize": "^6.1.0",
-    "sequelize-cli": "^6.0.0"
+    "sequelize": "^6.2.4",
+    "sequelize-cli": "^6.1.0"
   }
 }
