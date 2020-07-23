@@ -11,12 +11,11 @@ const Sample = sequelize.define('Sample',
     reserved      : DataTypes.BOOLEAN,
     launch        : DataTypes.DATE,
     phone         : DataTypes.STRING,
-    address       : DataTypes.UUID,
 },
 {
     tableName : 'sample'
 })
 
-Sample.belongsTo(Product, { foreignKey: 'sample_id', through: 'sample', as: 'samples'})
+Sample.belongsTo(Product, { foreignKey: 'product_id', as: 'samples'})
 
 module.exports = Sample;

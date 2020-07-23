@@ -18,21 +18,37 @@ module.exports = {
       width         : Sequelize.STRING,
       height        : Sequelize.STRING,
       weight        : Sequelize.STRING,
-      additional    : Sequelize.UUID,
       score         : Sequelize.FLOAT,
       description   : Sequelize.TEXT,
-      category      : Sequelize.UUID,
       product_state : Sequelize.STRING,
       composition   : Sequelize.UUID,
       launch        : Sequelize.DATE,
-      address       : Sequelize.UUID,
       consumable_by : Sequelize.STRING,
       slogan        : Sequelize.TEXT,
-      sample        : Sequelize.UUID,
-      supplier      : Sequelize.UUID,
       created_at    : Sequelize.DATE,
       updated_at    : Sequelize.DATE,
       excluded_at   : Sequelize.DATE,
+      additional_id : 
+      {
+        type : Sequelize.UUID,
+        references : {model: 'products', key: 'id'},
+        onUpdate : 'CASCADE',
+        onDelete : 'CASCADE', 
+      },
+      category_id : 
+      {
+        type : Sequelize.UUID,
+        references : {model: 'products', key: 'id'},
+        onUpdate : 'CASCADE',
+        onDelete : 'CASCADE', 
+      },
+      supplier_id : 
+      {
+        type : Sequelize.UUID,
+        references : {model: 'supplier', key: 'id'},
+        onUpdate : 'CASCADE',
+        onDelete : 'CASCADE', 
+      }
     });
      
   },
