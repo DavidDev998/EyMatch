@@ -1,30 +1,33 @@
-const Profession = require('../model/Profession');
+const Civil_status = require('../../model/Civil_status');
 
-module.exports = {
+module.exports =  {
+    
     async create(req,res)
     {
         try
         {
-            let newProfession = new Profession();
-            const profession = req.body;
-            if(profession !=null && profession.name != null)
+            let newCivil_status = new Civil_status();
+            
+            const {civil_status} = req.body;
+            if(civil_status !=null && civil_status.name != null)
             {
-                newProfession = await Profession.create(profession);
+                newCivil_status = await Civil_status.create(civil_status);
             }
 
-            return res.json({Profession:newProfession});
+            return res.json({Civil_status:newCivil_status});
         }
         catch(e)
         {
-            return res.json({Message:"Erro: " + e})
+            res.status(400);
+            return res.json({Message:"Erro: " + e});
         }
     },
 
     async index(req,res){
         try
         {
-            const professionList = await Profession.findAll();
-            res.json(professionList);
+            const listCivilStatus = await Civil_status.findAll();
+            res.json(listCivilStatus);
         }
         catch(e)
         {
@@ -35,13 +38,13 @@ module.exports = {
 
     async update(req,res){
         try{
-            const profession = req.body;
-            
+            const {civil_status} = req.body;
             //verifica se existe
-            const toUpdate = await Profession.findByPk(profession.id);
+            const toUpdate = await Civil_status.findByPk(civil_status.id);
             if(toUpdate)
             {
-                (await toUpdate).update(profession)
+                //atualiza
+                (await toUpdate).update(civil_status)
             }
             res.json({Message:"Success"})
             
@@ -56,7 +59,7 @@ module.exports = {
     async delete(req,res){
         try{
             const pk =  parseInt(req.params.pk);
-            const toExclude = await Profession.findByPk(pk);
+            const toExclude = await Civil_status.findByPk(pk);
 
             await toExclude.destroy();
 

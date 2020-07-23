@@ -1,5 +1,6 @@
 const dbConfig = require('../config/database');
 const { Sequelize, DataTypes } = require('sequelize');
+const { hasOne } = require('./Immovable_property');
 const sequelize = new Sequelize(dbConfig);
 const Immovable = sequelize.define('immovable_property');
 const Movable = sequelize.define('movables');
@@ -9,6 +10,7 @@ const Regime_of_goods = sequelize.define('regime_of_goods');
 const Phone = sequelize.define('phone');
 const Email = sequelize.define('email');
 const Address = sequelize.define('address');
+const Person_Type = sequelize.define('person_type');
 
 const Person = sequelize.define('Person', {
   // Caracteristicas
@@ -75,6 +77,7 @@ const Person = sequelize.define('Person', {
 
 Person.hasMany(Immovable,{ foreignKey: 'person_id',as: 'immovables'  });
 Person.hasMany(Movable,{ foreignKey: 'person_id',as: 'movables'  });
+Person.belongsTo(Person_Type,{foreignKey:'person_type_id',as:'type'});
 Person.belongsTo(Profession,{ foreignKey: 'profession_id',as: 'profession'  });
 Person.belongsTo(Civil_status,{ foreignKey: 'civil_status_id',as: 'civil_status'  });
 Person.belongsTo(Regime_of_goods,{ foreignKey: 'regime_de_bens_id',as: 'regime_of_goods'  });

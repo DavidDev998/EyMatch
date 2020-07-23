@@ -1,0 +1,12 @@
+POST /regime_of_goods/create HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+Content-Length: 81
+
+{
+ "regime_of_goods":
+	{
+		"name":"Separação de bens",
+		"note":"é isso ae"
+		}
+}

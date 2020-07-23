@@ -1,0 +1,3 @@
+//index all persons
+GET http://{{host}}/person
+

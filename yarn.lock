@@ -390,6 +390,11 @@ dot-prop@^5.2.0:
   dependencies:
     is-obj "^2.0.0"
 
+dotenv@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+  integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
+
 dottie@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/dottie/-/dottie-2.0.2.tgz#cc91c0726ce3a054ebf11c55fbc92a7f266dd154"
@@ -1434,10 +1439,10 @@ send@0.17.1:
     range-parser "~1.2.1"
     statuses "~1.5.0"
 
-sequelize-cli@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/sequelize-cli/-/sequelize-cli-6.0.0.tgz#2dc960459ae64d8555f258bf3cc6aa9876377e07"
-  integrity sha512-DhZ6QwBJR5VXjM5VFt49H+SbNCdJhfjW5seQyqvJA92te+w19lZBIRlKC42LtUnhLf3rBDn8Be3CSuT6reonbg==
+sequelize-cli@^6.1.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/sequelize-cli/-/sequelize-cli-6.2.0.tgz#fd02bfeae23b8226872f9947f3f8212cc49a4771"
+  integrity sha512-6WQ2x91hg30dUn66mXHnzvHATZ4pyI1GHSNbS/TNN/vRR4BLRSLijadeMgC8zqmKDsL0VqzVVopJWfJakuP++Q==
   dependencies:
     cli-color "^1.4.0"
     fs-extra "^7.0.1"
@@ -1452,10 +1457,10 @@ sequelize-pool@^6.0.0:
   resolved "https://registry.yarnpkg.com/sequelize-pool/-/sequelize-pool-6.0.0.tgz#2b2f6570fb633ecb38a338c4fc266c0e42ce2af7"
   integrity sha512-D/VfOX2Z+6JTWqM73lhcqMXp1X4CeqRNVMlndvbOMtyjFAZ2kYzH7rGFGFrLO1r+RZQdc/h+3zQL4nd3cclNLg==
 
-sequelize@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-6.1.0.tgz#576eb95709142dbc96f4a8f2b166932cc2781f8d"
-  integrity sha512-8x603RQrj14QZ4dGpsYPMr3YGqsihNX9WPclNN83prwrhHAJH9LHfOG/pK2XUdrwYtbRz+2a7xKXK7rVdw3P2A==
+sequelize@^6.2.4:
+  version "6.3.3"
+  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-6.3.3.tgz#930ab26f9e928d9bf2fe1fe477b428a092fef063"
+  integrity sha512-WO/b1ehjSFKlBCHzwZoaPhoW3WyXXy9x74yPrOP8NpE67wzbv0dIucDO4a+THLVyl3lnv3nFMZdJRdkUgb/ZAw==
   dependencies:
     debug "^4.1.1"
     dottie "^2.0.0"

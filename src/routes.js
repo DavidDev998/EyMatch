@@ -3,20 +3,26 @@ const express = require('express');
 const routes = express.Router();
 
 //IMPORTAÇÃO DAS CONTROLLERS
-const PersonController = require('./controller/PersonController');
-const Civil_statusController = require('./controller/CivilStatusController');
-const ProfessionController = require('./controller/ProfessionController');
-const RegimeOfGoodsController = require('./controller/RegimeOfGoodsController');
+const PersonController = require('./controller/Person/PersonController');
+const Civil_statusController = require('./controller/Person/CivilStatusController');
+const ProfessionController = require('./controller/Person/ProfessionController');
+const PersonFieldsConfigController = require('./controller/Person/PersonFieldsConfigController');
+const RegimeOfGoodsController = require('./controller/Person/RegimeOfGoodsController');
 const JuridicalPersonController = require('./controller/JuridicalPersonController');
 
 //TODO: SEPARAR AS ROTAS DE CADA CONTROLLER EM ARQQUIVOS DIFERENNTES
 
 
 //ROTAS DE  PERSON
-routes.post('/Person/Create', PersonController.create);
-routes.get('/Person',PersonController.index);
-routes.get('/Person/Delete/:pk', PersonController.delete);
-routes.post('/Person/Update/', PersonController.update);
+routes.post('/person/create', PersonController.create);
+routes.get('/person',PersonController.index);
+routes.post('/person/delete/:pk', PersonController.delete);
+routes.post('/person/update/', PersonController.update);
+routes.get('/person/personfields',PersonController.PersonFields);
+
+//ROTAS CONFIG PERSON
+
+routes.get('/person/config/updateFields',PersonFieldsConfigController.updateFields);
 
 //ROTAS DE PROFESSION
 routes.post('/profession/create',ProfessionController.create);

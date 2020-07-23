@@ -1,13 +1,15 @@
-const Person  = require('../model/Person');
-const Immovable = require('../model/Immovable_property');
-const Movable = require('../model/Movables');
-const Profession = require('../model/Profession');
-const Civil_status = require('../model/Civil_status');
-const Regime_of_goods = require('../model/Regime_of_goods');
-const { findByPk, update } = require('../model/Person');
-const Phone = require('../model/Phone');
-const Email = require('../model/Email');
-const Address = require('../model/Address');
+const Person  = require('../../model/Person');
+const Immovable = require('../../model/Immovable_property');
+const Movable = require('../../model/Movables');
+const Profession = require('../../model/Profession');
+const Civil_status = require('../../model/Civil_status');
+const Regime_of_goods = require('../../model/Regime_of_goods');
+const { findByPk, update } = require('../../model/Person');
+const Phone = require('../../model/Phone');
+const Email = require('../../model/Email');
+const Address = require('../../model/Address');
+
+require('dotenv').config()
 
 module.exports ={
     //cria Person
@@ -49,7 +51,6 @@ module.exports ={
                 });
                 
             }
-
             //cria email
             if(email != null)
             {
@@ -67,7 +68,6 @@ module.exports ={
                     //cria o telefone
                     newAddress = (await Address.create(element));
                     newPerson.addAddresses(newAddress.id);
-                    console.log(newAddress)
                 });
             }
             //cria immovable_property
@@ -113,6 +113,7 @@ module.exports ={
     async index(req,res){
         try
         {
+            console.log(process.env.HOST)
             const listPerson = await Person.findAll();
             return res.json(listPerson);
         }
@@ -157,6 +158,17 @@ module.exports ={
             res.status(400)
             res.json({Message:"Erro " + e.Message})
         }
+    },
+
+    async PersonFields(req,res){
+
+
+        const teste = new Object();
+        teste.nome = "David";
+        teste.idade = 15;
+
+        console.log(teste["idade"])
+        res.json(Object.keys(Person.tableAttributes));
     }
 
 }

@@ -1,18 +1,18 @@
-const Regime_of_goods = require('../model/Regime_of_goods');
+const Profession = require('../../model/Profession');
 
 module.exports = {
     async create(req,res)
     {
         try
         {
-            let newRegime_of_goods = new Regime_of_goods();
-            const {regime_of_goods} = req.body;
-            if(regime_of_goods !=null && regime_of_goods.name != null)
+            let newProfession = new Profession();
+            const profession = req.body;
+            if(profession !=null && profession.name != null)
             {
-                newRegime_of_goods = await Regime_of_goods.create(regime_of_goods);
+                newProfession = await Profession.create(profession);
             }
 
-            return res.json({Regime_of_goods:newRegime_of_goods});
+            return res.json({Profession:newProfession});
         }
         catch(e)
         {
@@ -23,8 +23,8 @@ module.exports = {
     async index(req,res){
         try
         {
-            const regimeList = await Regime_of_goods.findAll();
-            res.json(regimeList);
+            const professionList = await Profession.findAll();
+            res.json(professionList);
         }
         catch(e)
         {
@@ -35,12 +35,13 @@ module.exports = {
 
     async update(req,res){
         try{
-            const {regime_of_goods} = req.body;
+            const profession = req.body;
+            
             //verifica se existe
-            const toUpdate = await Regime_of_goods.findByPk(regime_of_goods.id);
+            const toUpdate = await Profession.findByPk(profession.id);
             if(toUpdate)
             {
-                (await toUpdate).update(regime_of_goods)
+                (await toUpdate).update(profession)
             }
             res.json({Message:"Success"})
             
@@ -55,7 +56,7 @@ module.exports = {
     async delete(req,res){
         try{
             const pk =  parseInt(req.params.pk);
-            const toExclude = await Regime_of_goods.findByPk(pk);
+            const toExclude = await Profession.findByPk(pk);
 
             await toExclude.destroy();
 

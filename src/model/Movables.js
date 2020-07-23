@@ -15,6 +15,6 @@ const Movables = sequelize.define('Movables', {
     tableName: 'movables'
   });
 
-  Movables.belongsTo(Person, { foreignKey:'person_id', as: 'person' })
+  Movables.belongsTo(Person,{ foreignKey:'person_id', as: 'person' });
 
 module.exports = Movables;
