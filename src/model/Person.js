@@ -77,7 +77,6 @@ const Person = sequelize.define('Person', {
 
 Person.hasMany(Immovable,{ foreignKey: 'person_id',as: 'immovables'  });
 Person.hasMany(Movable,{ foreignKey: 'person_id',as: 'movables'  });
-Person.belongsTo(Person_Type,{foreignKey:'person_type_id',as:'type'});
 Person.belongsTo(Profession,{ foreignKey: 'profession_id',as: 'profession'  });
 Person.belongsTo(Civil_status,{ foreignKey: 'civil_status_id',as: 'civil_status'  });
 Person.belongsTo(Regime_of_goods,{ foreignKey: 'regime_de_bens_id',as: 'regime_of_goods'  });

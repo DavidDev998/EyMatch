@@ -1,5 +1,6 @@
 const PersonConfig = require('../../model/Person_fields_config');
 const Person = require('../../model/Person');
+const { index } = require('./PersonTypeController');
 
 module.exports =  {
     async updateFields(req,res){
@@ -11,5 +12,10 @@ module.exports =  {
                 required:false
             }});
         });
+    },
+
+    async index(req,res)
+    {
+        
     }
 };

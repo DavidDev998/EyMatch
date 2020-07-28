@@ -34,6 +34,6 @@ Address.belongsToMany(Person, { foreignKey:'address_id', through:'person_address
 Address.belongsToMany(Product, { foreignKey: 'address_id', through: 'product', as: 'products' })
 Address.belongsToMany(Sample, { foreignKey: 'address_id', through: 'sample', as: 'samples' })
 //Address.belongsToMany(JuridicalPerson, { foreignKey: 'address_id', through: 'juridical_person', as: 'juridical_persons' })
-Address.belongsToMany(Movables, { foreignKey: 'address_id', through: 'movables', as: 'movables' })
+Address.belongsToMany(Movables, { foreignKey: 'address_id', through: 'movables', as: 'movablesAdress' })
 
 module.exports = Address;

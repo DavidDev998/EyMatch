@@ -41,9 +41,11 @@ module.exports = {
             const toUpdate = await Profession.findByPk(profession.id);
             if(toUpdate)
             {
-                (await toUpdate).update(profession)
+                (await toUpdate).update(profession);
+                res.json({Message:"Success"})
             }
-            res.json({Message:"Success"})
+            res.status(404)
+            res.json({Message:"Profession not found"})
             
         }
         catch(e)

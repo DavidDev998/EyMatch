@@ -8,6 +8,7 @@ const { findByPk, update } = require('../../model/Person');
 const Phone = require('../../model/Phone');
 const Email = require('../../model/Email');
 const Address = require('../../model/Address');
+const Person_type = require('../../model/Person_type');
 
 require('dotenv').config()
 
@@ -20,6 +21,7 @@ module.exports ={
             const { immovable }  = req.body;
             const { movable }  = req.body;
             const { profession }  = req.body;
+            const { person_type } = req.body;
             const { civil_status } = req.body;
             const { regime_of_goods } = req.body;
             const { phone } = req.body;
@@ -33,6 +35,7 @@ module.exports ={
             let newPhone = new Phone();
             let newEmail = new Email();
             let newAddress = new Address();
+            let newPersonType  = new Person_type();
 
             //cria Person
             if(person != null)
@@ -82,6 +85,13 @@ module.exports ={
                 newMovable = await Movable.create(movable);
                 newMovable.setPerson(newPerson.id);
             }
+            //Vincula ao  tipo person
+            newPersonType = await Person_type.findByPk(person_type);
+            if(newPersonType != null)
+            {
+                newPerson.setType(newPersonType.id);
+            }
+
             //Vincula a uma profissao
             newProfession = await Profession.findByPk(profession);
             if(newProfession != null)
@@ -110,17 +120,15 @@ module.exports ={
         
     },
 
-    async index(req,res){
+    async index(){
         try
         {
-            console.log(process.env.HOST)
             const listPerson = await Person.findAll();
-            return res.json(listPerson);
+            return listPerson;
         }
         catch(e)
         {
-            res.status(404)
-            return res.json({Message:"Erro: " + e})
+            return json({Message:"Erro: " + e})
         }
         
     },

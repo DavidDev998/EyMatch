@@ -45,8 +45,10 @@ module.exports =  {
             {
                 //atualiza
                 (await toUpdate).update(civil_status)
+                res.json({Message:"Success"})
             }
-            res.json({Message:"Success"})
+            res.status(404)
+            res.json({Message:"Civil status not found"})
             
         }
         catch(e)

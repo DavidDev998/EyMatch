@@ -13,4 +13,4 @@ const Person_type = sequelize.define('Person_type',{
 
 Person_type.hasOne(Person,{foreignKey:'person_type_id',through:'person',as:'persons'});
 
-module.exports = Person_fields_config;
+module.exports = Person_type;

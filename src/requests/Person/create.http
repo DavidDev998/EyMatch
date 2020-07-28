@@ -110,5 +110,6 @@ Content-Length: 2362
 			"block":"12",
 			"lot":"123"
 		}
-	]
+	],
+  "person_type":1
 }

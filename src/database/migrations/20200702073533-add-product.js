@@ -28,27 +28,27 @@ module.exports = {
       created_at    : Sequelize.DATE,
       updated_at    : Sequelize.DATE,
       excluded_at   : Sequelize.DATE,
-      additional_id : 
-      {
-        type : Sequelize.UUID,
-        references : {model: 'products', key: 'id'},
-        onUpdate : 'CASCADE',
-        onDelete : 'CASCADE', 
-      },
-      category_id : 
-      {
-        type : Sequelize.UUID,
-        references : {model: 'products', key: 'id'},
-        onUpdate : 'CASCADE',
-        onDelete : 'CASCADE', 
-      },
-      supplier_id : 
-      {
-        type : Sequelize.UUID,
-        references : {model: 'supplier', key: 'id'},
-        onUpdate : 'CASCADE',
-        onDelete : 'CASCADE', 
-      }
+      // additional_id : 
+      // {
+      //   type : Sequelize.UUID,
+      //   references : {model: 'products', key: 'id'},
+      //   onUpdate : 'CASCADE',
+      //   onDelete : 'CASCADE', 
+      // },
+      // category_id : 
+      // {
+      //   type : Sequelize.UUID,
+      //   references : {model: 'products', key: 'id'},
+      //   onUpdate : 'CASCADE',
+      //   onDelete : 'CASCADE', 
+      // },
+      // supplier_id : 
+      // {
+      //   type : Sequelize.UUID,
+      //   references : {model: 'supplier', key: 'id'},
+      //   onUpdate : 'CASCADE',
+      //   onDelete : 'CASCADE', 
+      // }
     });
      
   },

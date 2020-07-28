@@ -1,7 +1,11 @@
 //IMPORT DO EXPRESS
+const path =  require('path')
 const express = require('express');
-const routes = express.Router();
-
+const routes = express();
+//SETA O EJS COMO TEMPLATE ENGINE
+routes.set('view engine', 'ejs');
+//MUDA O DIRETÓRIO DA PASTA VIEWS
+routes.set('views', path.resolve(__dirname,'views'));
 //IMPORTAÇÃO DAS CONTROLLERS
 const PersonController = require('./controller/Person/PersonController');
 const Civil_statusController = require('./controller/Person/CivilStatusController');
@@ -9,19 +13,29 @@ const ProfessionController = require('./controller/Person/ProfessionController')
 const PersonFieldsConfigController = require('./controller/Person/PersonFieldsConfigController');
 const RegimeOfGoodsController = require('./controller/Person/RegimeOfGoodsController');
 const JuridicalPersonController = require('./controller/JuridicalPersonController');
+const PersonTypeController = require('./controller/Person/PersonTypeController');
 
 //TODO: SEPARAR AS ROTAS DE CADA CONTROLLER EM ARQQUIVOS DIFERENNTES
 
 
 //ROTAS DE  PERSON
 routes.post('/person/create', PersonController.create);
-routes.get('/person',PersonController.index);
+routes.get('/person',async function(req,res)
+{
+    const people = await PersonController.index();
+    res.render("./person/index",{people:people});
+});
 routes.post('/person/delete/:pk', PersonController.delete);
 routes.post('/person/update/', PersonController.update);
 routes.get('/person/personfields',PersonController.PersonFields);
 
-//ROTAS CONFIG PERSON
+//ROTAS DE PERSON TYPE
+routes.post('/person/persontype/create',PersonTypeController.create);
+routes.get('/person/persontype',PersonTypeController.index);
+routes.post('/person/persontype/update',PersonTypeController.update);
+routes.post('/person/persontype/delete/:pk',PersonTypeController.delete);
 
+//ROTAS CONFIG PERSON
 routes.get('/person/config/updateFields',PersonFieldsConfigController.updateFields);
 
 //ROTAS DE PROFESSION
