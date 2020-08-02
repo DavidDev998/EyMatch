@@ -1,2 +1,0 @@
-GET /person/config/updateFields HTTP/1.1
-Host: {{host}}

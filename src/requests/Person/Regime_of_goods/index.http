@@ -1,3 +1,0 @@
-GET /regime_of_goods/index HTTP/1.1
-Host: {{host}}
-

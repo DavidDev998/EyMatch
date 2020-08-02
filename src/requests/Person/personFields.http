@@ -1,3 +1,0 @@
-GET /person/personfields HTTP/1.1
-Host: {{host}}
-

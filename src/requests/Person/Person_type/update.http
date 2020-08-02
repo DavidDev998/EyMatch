@@ -1,9 +1,0 @@
-POST /person/persontype/update HTTP/1.1
-Content-Type: application/json
-Host: {{host}}
-
-{
-	"id":4,
-	"name":"Advogado",
-	"note":"teste update"
-}

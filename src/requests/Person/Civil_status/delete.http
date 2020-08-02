@@ -1,3 +1,0 @@
-POST /civil_status/delete/2 HTTP/1.1
-Host: {{host}}
-

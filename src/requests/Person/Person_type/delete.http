@@ -1,2 +1,0 @@
-POST /person/persontype/delete/4 HTTP/1.1
-Host: {{host}}

@@ -1,9 +1,0 @@
-POST /person/persontype/create HTTP/1.1
-Content-Type: application/json
-Host: {{host}}
-Content-Length: 106
-
-{
-	"name":"Procurador",
-	"note":"teste person type  relation"
-}
