@@ -1,6 +1,6 @@
 const pg = require('pg');
 const fs = require('fs');
-const dbConfig = require('../database/config');
+const dbConfig = require('../../database/config');
 const TablesController = require('./tablesController');
 
 module.exports  = {

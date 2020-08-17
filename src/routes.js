@@ -1,8 +1,9 @@
 const express = require('express');
 const routes = express.Router();
-const dbConfig = require('./database/config');
+const dbConfig = require('.//database/config');
+const clientCtrl = require('./controller/clientController');
 
-const dataBaseController = require('./controller/dataBaseController');
+const dataBaseController = require('./controller/databaseController/dataBaseController');
 
 routes.get('/',async function(req,res){
     try{
@@ -18,6 +19,8 @@ routes.get('/',async function(req,res){
     res.json()
 });
 
-routes.post('/createDataBase',dataBaseController.createDataBase)
+routes.post('/createDataBase',dataBaseController.createDataBase);
+
+routes.post('/client/create',clientCtrl.create);
 
 module.exports = routes;
