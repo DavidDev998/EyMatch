@@ -22,5 +22,8 @@ routes.get('/',async function(req,res){
 routes.post('/createDataBase',dataBaseController.createDataBase);
 
 routes.post('/client/create',clientCtrl.create);
+routes.get('/client/read',clientCtrl.read);
+routes.post('/client/update',clientCtrl.update);
+routes.post('/client/delete/:id',clientCtrl.delete)
 
 module.exports = routes;
