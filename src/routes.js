@@ -4,13 +4,14 @@ const dbConfig = require('.//database/config');
 const clientCtrl = require('./controller/clientController');
 
 const dataBaseController = require('./controller/databaseController/dataBaseController');
+const authenticate = require('./controller/authentication');
 
 routes.get('/',async function(req,res){
     try{
         const db = await dbConfig.DBconnect("eymatch");
         var retorno = await db.query('SELECT CURRENT_TIMESTAMP');
 
-        res.json(retorno.rows[0]);
+        res.json(retorno);
     }
     catch(e)
     {
@@ -18,6 +19,8 @@ routes.get('/',async function(req,res){
     }    
     res.json()
 });
+
+routes.get('/authenticate',authenticate.authenticate);
 
 routes.post('/createDataBase',dataBaseController.createDataBase);
 
