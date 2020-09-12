@@ -19,8 +19,9 @@ routes.get('/',async function(req,res){
     }    
     res.json()
 });
+routes.get('/:empresa/authenticate/empresa',authenticate.empresaExists);
 
-routes.get('/authenticate',authenticate.authenticate);
+routes.post('/:empresa/authenticate/user',authenticate.authenticate);
 
 routes.post('/createDataBase',dataBaseController.createDataBase);
 

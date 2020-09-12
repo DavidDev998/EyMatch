@@ -1,9 +1,22 @@
 const db_config = require('../database/config')
 
 module.exports = {
+    async empresaExists(req,res){
+        const empresa = req.params.empresa;
+        if(empresa){
+            const db = await db_config.DBconnect("eymatch");
+            const DbEmpresa = await (await db.query(`SELECT * FROM empresa WHERE url='${empresa}'`));
+            if(DbEmpresa.rows[0]){
+                res.json({exists:true})
+            }else{
+                res.json({exists:false})
+            }
+        }
+    },
+
     async authenticate(req,res){
         const {user} = req.body;
-        const {empresa} = req.body;
+        const empresa = req.params.empresa;
         
         let userReturn = new Object();
         userReturn.athenticated = false;
