@@ -7,7 +7,8 @@ module.exports = {
             const db = await db_config.DBconnect("eymatch");
             const DbEmpresa = await (await db.query(`SELECT * FROM empresa WHERE url='${empresa}'`));
             if(DbEmpresa.rows[0]){
-                res.json({exists:true})
+                console.log(DbEmpresa.rows[0])
+                res.json({exists:true,companyName:DbEmpresa.rows[0].name})
             }else{
                 res.json({exists:false})
             }
@@ -15,7 +16,7 @@ module.exports = {
     },
 
     async authenticate(req,res){
-        const {user} = req.body;
+        const user = req.body;
         const empresa = req.params.empresa;
         
         let userReturn = new Object();
@@ -28,7 +29,7 @@ module.exports = {
                 if(userAuthenticated.rows[0].password == user.password){
                     userReturn.login = userAuthenticated.rows[0].login;
                     userReturn.name = userAuthenticated.rows[0].name;
-                    userReturn.athenticated = true;
+                    userReturn.authenticated = true;
                     userReturn.message = "Usuário autenticado com sucesso";
                 }
                 else{
@@ -37,6 +38,7 @@ module.exports = {
             }else{
                 userReturn.message = "Usuário inválido"
             }
+            console.log(userReturn);
             res.json(userReturn);
         }else{
             res.json({teste:"foda-se"});
