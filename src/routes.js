@@ -19,7 +19,7 @@ routes.get('/',async function(req,res){
     }    
     res.json()
 });
-routes.get('/:empresa/authenticate/empresa',authenticate.empresaExists);
+routes.get('/:empresa/authenticate/empresa',authenticate.companyExists);
 
 routes.post('/:empresa/authenticate/user',authenticate.authenticate);
 

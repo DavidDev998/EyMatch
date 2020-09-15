@@ -1,13 +1,12 @@
 const db_config = require('../database/config')
 
 module.exports = {
-    async empresaExists(req,res){
+    async companyExists(req,res){
         const empresa = req.params.empresa;
         if(empresa){
             const db = await db_config.DBconnect("eymatch");
             const DbEmpresa = await (await db.query(`SELECT * FROM empresa WHERE url='${empresa}'`));
             if(DbEmpresa.rows[0]){
-                console.log(DbEmpresa.rows[0])
                 res.json({exists:true,companyName:DbEmpresa.rows[0].name})
             }else{
                 res.json({exists:false})
@@ -38,7 +37,6 @@ module.exports = {
             }else{
                 userReturn.message = "Usuário inválido"
             }
-            console.log(userReturn);
             res.json(userReturn);
         }else{
             res.json({teste:"foda-se"});
