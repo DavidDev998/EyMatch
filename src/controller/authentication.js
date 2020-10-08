@@ -6,6 +6,7 @@ module.exports = {
         if(empresa){
             const db = await db_config.DBconnect("eymatch");
             const DbEmpresa = await (await db.query(`SELECT * FROM empresa WHERE url='${empresa}'`));
+            db.end();
             if(DbEmpresa.rows[0]){
                 res.json({exists:true,companyName:DbEmpresa.rows[0].name})
             }else{
@@ -24,6 +25,7 @@ module.exports = {
         if(user){
             const db = await db_config.DBconnect(empresa);
             const userAuthenticated = await (await db.query(`SELECT * FROM users WHERE login='${user.login}'`));
+            db.end();
             if(userAuthenticated.rows[0]){
                 if(userAuthenticated.rows[0].password == user.password){
                     userReturn.login = userAuthenticated.rows[0].login;
