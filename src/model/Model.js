@@ -2,13 +2,13 @@ const dbConfig = require('../database/config');
 
 class Model{
 
-    constructor(table){
+    constructor(table,company){
         this.table = table;
+        this.company = company
     }
     static async create(object){
         try
         {
-            console.log(object)
             //arrays de keys e values para montar a SQL 
             let keys = [];
             let values = [];
@@ -16,24 +16,28 @@ class Model{
             //mapeia as entradas
             for (const [key, value] of Object.entries(object)) 
             {
-                if(value != null && key != "table")
+                if(value != null && value != '' && key != "table" && key != "company")
                 {
                     keys.push(key);
-                    values.push(value);
+                    if(/^\d+$/.test(value)){
+                        values.push(+value)
+                    }else{
+                        values.push(`'${value}'`)
+                    }
                 }
             }
             //monta a sql de busca
             const sql = `INSERT INTO ${object.table}(${keys.join(',')})` +
-                        `VALUES(${values.join(',')})`;
+                        `VALUES(${values.join(",")})`;
 
-            return sql;
-            // abre a conexão com o banco
-            // const db = await dbConfig.DBconnect("eymatch");
+            //abre a conexão com o banco
+            const db = await dbConfig.DBconnect(object.company);
 
-            // //roda a SQL
-            // let res = db.query(sql);
-            // db.end();
-            // return res;
+            
+            //roda a SQL
+            let res = await db.query(sql);
+            db.end();
+            return "Inserido com sucesso";
         }
         catch(e)
         {
@@ -47,16 +51,13 @@ class Model{
             //monta a sql de inserção
             const sql = `SELECT * FROM ${object.table}`;
 
-            return sql;
+            // abre a conexão com o banco
+            const db = await dbConfig.DBconnect(object.company);
 
-            // // abre a conexão com o banco
-            // const db = await dbConfig.DBconnect("eymatch");
-
-            // //roda a SQL
-            // let res = db.query(sql);
-            // res = res.rows[0]
-            // db.end();
-            // return res;
+            //roda a SQL
+            let res = await db.query(sql);
+            db.end();
+            return res;
         }
         catch(e)
         {
@@ -84,13 +85,13 @@ class Model{
 
             return sql;
 
-            // // abre a conexão com o banco
-            // const db = await dbConfig.DBconnect("eymatch");
+            // abre a conexão com o banco
+            const db = await dbConfig.DBconnect("eymatch");
 
-            // //roda a SQL
-            // let res = db.query(sql);
-            // db.end();
-            // return res;
+            //roda a SQL
+            let res = db.query(sql);
+            db.end();
+            return res;
         }
         catch(e)
         {
@@ -105,13 +106,32 @@ class Model{
             const sql = `DELETE FROM ${object.table} WHERE id = ${object.id}`;
 
             return sql;
-            // // abre a conexão com o banco
-            // const db = await dbConfig.DBconnect("eymatch");
+            // abre a conexão com o banco
+            const db = await dbConfig.DBconnect("eymatch");
 
-            // //roda a SQL
-            // let res = db.query(sql);
-            // db.end();
-            // return res;
+            //roda a SQL
+            let res = db.query(sql);
+            db.end();
+            return res;
+        }
+        catch(e)
+        {
+            return "Erro : " + e.message;
+        }
+    }
+    static async readById(object){
+        try
+        {
+            //monta a sql de inserção
+            const sql = `SELECT * FROM ${object.table} WHERE id = '${object.id}'`;
+
+            // abre a conexão com o banco
+            const db = await dbConfig.DBconnect(object.company);
+
+            //roda a SQL
+            let res = await db.query(sql);
+            db.end();
+            return res;
         }
         catch(e)
         {

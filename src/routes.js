@@ -25,9 +25,10 @@ routes.post('/:empresa/authenticate/user',authenticate.authenticate);
 
 routes.post('/createDataBase',dataBaseController.createDataBase);
 
-routes.post('/client/create',clientCtrl.create);
-routes.get('/client/read',clientCtrl.read);
-routes.post('/client/update',clientCtrl.update);
-routes.post('/client/delete/:id',clientCtrl.delete)
+routes.post('/:company/client/create',clientCtrl.create);
+routes.get('/:company/client/read',clientCtrl.read);
+routes.get('/:company/client/read/:id',clientCtrl.readById)
+routes.post('/:company/client/update',clientCtrl.update);
+routes.post('/:company/client/delete/:id',clientCtrl.delete) 
 
 module.exports = routes;

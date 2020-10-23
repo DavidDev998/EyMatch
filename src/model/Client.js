@@ -1,8 +1,8 @@
 const Model = require('./Model')
 
 class Client extends Model {
-    constructor(obj){
-        super("client");
+    constructor(obj,company){
+        super("client",company);
         this.id = obj.id;
         this.name = obj.name;
         this.birth_date = obj.birth_date;
