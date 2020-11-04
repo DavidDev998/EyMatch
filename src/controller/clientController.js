@@ -1,3 +1,4 @@
+const { ClientBase } = require('pg');
 const Client = require('../model/Client');
 
 module.exports = {

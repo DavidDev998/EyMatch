@@ -26,6 +26,8 @@ class Model{
                     }
                 }
             }
+            keys.push('created_at');
+            values.push(`'${new Date().toUTCString()}'`)
             //monta a sql de busca
             const sql = `INSERT INTO ${object.table}(${keys.join(',')})` +
                         `VALUES(${values.join(",")})`;
@@ -33,7 +35,7 @@ class Model{
             //abre a conexão com o banco
             const db = await dbConfig.DBconnect(object.company);
 
-            
+             
             //roda a SQL
             let res = await db.query(sql);
             db.end();
@@ -57,7 +59,7 @@ class Model{
             //roda a SQL
             let res = await db.query(sql);
             db.end();
-            return res;
+            return res.rows;
         }
         catch(e)
         {
@@ -66,32 +68,34 @@ class Model{
     }
     static async update(object)
     {
+        console.log(object)
         try
         {
             let entries = [];
 
-            //mapeia as entradas
             for (const [key, value] of Object.entries(object)) 
             {
-                if(value != null && key != "id" && key != "table")
+                if(value != null && value != '' && key != "table" && key != "company" && key != "id")
                 {
-                    entries.push(key + "=" + value);
+                    if(/^\d+$/.test(value)){
+                        entries.push(`${key} = ${+value}`)
+                    }else{
+                        entries.push(`${key} = '${value}'`)
+                    }
                 }
-            } 
+            }
 
             //monta a sql de update
             const sql = `UPDATE ${object.table} SET ${entries.join(',')} ` + 
-                        `WHERE id = ${object.id}`;
-
-            return sql;
+                        `WHERE id = '${object.id}'`;
 
             // abre a conexão com o banco
-            const db = await dbConfig.DBconnect("eymatch");
+            const db = await dbConfig.DBconnect(object.company);
 
             //roda a SQL
-            let res = db.query(sql);
+            let res = await db.query(sql);
             db.end();
-            return res;
+            return "Atualizado com sucesso";
         }
         catch(e)
         {
