@@ -1,4 +1,4 @@
-const Attendance = require('../model/Atendimento');
+const Attendance = require('../model/Attendance');
 
 module.exports = {
     async create(req,res){
@@ -26,22 +26,19 @@ module.exports = {
         return retorno
     },
     async delete(req,res){
-        const toDelete = new Client(req.params);
-        
-        
-        var retorno = await Client.delete(toDelete);
+        const company = req.params.company;
+        const toDelete = new Attendance(req.params,company);
+    
+        var retorno = await Attendance.delete(toDelete);
         res.json(retorno);
     },
-    async updateStatus(req,res){
+    async readById(req,res){
         const id = req.params.id;
         const company = req.params.company;
-        const attendance = new Object();
+        const attendance = new Attendance(new Object(),company);
         attendance.id = id;
-        attendance.etapa = req.body.etapa;
-        
-        const newStatus = new Attendance(attendance,company)
 
-        var retorno = await Attendance.update(newStatus);
-        return retorno
+        var retorno = await Attendance.readById(attendance);
+        res.json(retorno.rows[0]);
     }
 }

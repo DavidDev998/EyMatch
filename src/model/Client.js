@@ -4,6 +4,7 @@ class Client extends Model {
     constructor(obj,company){
         super("client",company);
         this.id = obj.id;
+        this.number = obj.number;
         this.name = obj.name;
         this.birth_date = obj.birth_date;
         this.cpf = obj.cpf;

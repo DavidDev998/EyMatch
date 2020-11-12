@@ -1,10 +1,12 @@
+const { json } = require('express');
 const dbConfig = require('../database/config');
 
 class Model{
 
-    constructor(table,company){
+    constructor(table,company,relationships){
         this.table = table;
         this.company = company
+        this.relationships = relationships
     }
     static async create(object){
         try
@@ -16,7 +18,7 @@ class Model{
             //mapeia as entradas
             for (const [key, value] of Object.entries(object)) 
             {
-                if(value != null && value != '' && key != "table" && key != "company")
+                if(value != null && value != '' && key != "table" && key != "company" && key != "relationships")
                 {
                     keys.push(key);
                     if(/^\d+$/.test(value)){
@@ -50,14 +52,23 @@ class Model{
     {
         try
         {
+            
+            var retorno = new Object();
             //monta a sql de inserção
-            const sql = `SELECT * FROM ${object.table}`;
-
+            var relations = ['*'];
+            if(object.relationships)
+            {
+                object.relationships.forEach(element => {
+                    relations.push(`(SELECT name FROM ${element} WHERE id = ${object.table}.${element}) as ${element}_name`)
+                });
+            }
+            var text = `SELECT ${relations.join(', ')} FROM ${object.table} WHERE excluded_at IS NULL`;
+            var sql = {
+                text:text
+            }
             // abre a conexão com o banco
             const db = await dbConfig.DBconnect(object.company);
-
-            //roda a SQL
-            let res = await db.query(sql);
+            var res = await db.query(sql);
             db.end();
             return res.rows;
         }
@@ -68,14 +79,13 @@ class Model{
     }
     static async update(object)
     {
-        console.log(object)
         try
         {
             let entries = [];
 
             for (const [key, value] of Object.entries(object)) 
             {
-                if(value != null && value != '' && key != "table" && key != "company" && key != "id")
+                if(value != null && value != '' && key != "table" && key != "company" && key != "id" && key != "relationships")
                 {
                     if(/^\d+$/.test(value)){
                         entries.push(`${key} = ${+value}`)
@@ -106,29 +116,62 @@ class Model{
     {
         try
         {
+            console.log(object)
             //monta a sql de update
-            const sql = `DELETE FROM ${object.table} WHERE id = ${object.id}`;
+            const sql = `DELETE FROM ${object.table} WHERE id = '${object.id}'`;
 
-            return sql;
+            console.log(sql)
             // abre a conexão com o banco
-            const db = await dbConfig.DBconnect("eymatch");
+            const db = await dbConfig.DBconnect(object.company);
 
             //roda a SQL
-            let res = db.query(sql);
+            let res = await db.query(sql);
             db.end();
-            return res;
+            return "Deletado com sucesso";
         }
         catch(e)
         {
             return "Erro : " + e.message;
         }
     }
+
+    static async readByFilter(object){
+        try{
+            let entries = [];
+
+            for (const [key, value] of Object.entries(object)) 
+            {
+                if(value != null && value != '' && key != "table" && key != "company")
+                {
+                    if(/^\d+$/.test(value)){
+                        entries.push(`${key} = ${+value}`)
+                    }else{
+                        entries.push(`${key} = '${value}'`)
+                    }
+                }
+            }
+
+            //monta a sql de update
+            const sql = `SELECT * FROM ${object.table}` + 
+                        ` WHERE ${entries.join(' AND ')}`;
+
+            // abre a conexão com o banco
+            const db = await dbConfig.DBconnect(object.company);
+            //roda a SQL
+            let res = await db.query(sql);
+            db.end();
+            return res;
+        }catch(e)
+        {
+            return "Erro : " + e.message;
+        }
+    }
+
     static async readById(object){
         try
         {
             //monta a sql de inserção
             const sql = `SELECT * FROM ${object.table} WHERE id = '${object.id}'`;
-
             // abre a conexão com o banco
             const db = await dbConfig.DBconnect(object.company);
 

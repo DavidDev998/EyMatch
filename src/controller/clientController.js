@@ -17,15 +17,16 @@ module.exports = {
     },
     async update(req,res){
         const client = req.body;
-        let toUpdate = new Client(client)
+        const company = req.params.company;
+        let toUpdate = new Client(client,company)
 
         var retorno = await Client.update(toUpdate);
         res.json(retorno);
     },
     async delete(req,res){
-        const toDelete = new Client(req.params);
-        
-        
+        const company = req.params.company;
+        const toDelete = new Client(req.params,company);
+
         var retorno = await Client.delete(toDelete);
         res.json(retorno);
     },
